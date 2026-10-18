@@ -1,9 +1,38 @@
-♡LoveLens
-{{ 'Home' if lang == 'en' else 'హోమ్' }} {{ 'Check-in' if lang == 'en' else 'చెక్-ఇన్' }} {{ 'Advice' if lang == 'en' else 'సలహాలు' }} {{ 'Privacy' if lang == 'en' else 'ప్రైవసీ' }}
 
-English
-{% block content %}{% endblock %}
-♡ LoveLens
-{{ 'A reflection tool — not a diagnosis or a verdict about a person.' if lang == 'en' else 'ఇది ఆలోచించుకోవడానికి ఉపయోగపడే సాధనం మాత్రమే; నిర్ధారణ లేదా వ్యక్తిపై తీర్పు కాదు.' }}
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LoveLens{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}">♡ LoveLens</a>
+        <nav class="desktop-nav">
+            <a href="{{ url_for('index') }}">{{ 'Home' if lang == 'en' else 'హోమ్' }}</a>
+            <a href="{{ url_for('checkin') }}">{{ 'Check-in' if lang == 'en' else 'చెక్-ఇన్' }}</a>
+            <a href="{{ url_for('advice') }}">{{ 'Advice' if lang == 'en' else 'సలహాలు' }}</a>
+            <a href="{{ url_for('privacy') }}">{{ 'Privacy' if lang == 'en' else 'ప్రైవసీ' }}</a>
+        </nav>
+        <form class="language-form" method="get">
+            <button type="submit" name="lang" value="{{ 'te' if lang == 'en' else 'en' }}">
+                {{ 'తెలుగు' if lang == 'en' else 'English' }}
+            </button>
+        </form>
+    </header>
 
-© {{ year }} LoveLens · {{ 'Your answers are not stored in a database.' if lang == 'en' else 'మీ సమాధానాలు డేటాబేస్‌లో సేవ్ చేయబడవు.' }}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>♡ LoveLens</p>
+        <p>{{ 'A reflection tool — not a diagnosis or a verdict about a person.' if lang == 'en' else 'ఇది ఆలోచించుకోవడానికి ఉపయోగపడే సాధనం మాత్రమే; నిర్ధారణ లేదా వ్యక్తిపై తీర్పు కాదు.' }}</p>
+        <p>© {{ year }} LoveLens · {{ 'Your answers are not stored in a database.' if lang == 'en' else 'మీ సమాధానాలు డేటాబేస్‌లో సేవ్ చేయబడవు.' }}</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
