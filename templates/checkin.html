@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}{{ 'Relationship check-in' if lang == 'en' else 'సంబంధ చెక్-ఇన్' }}{% endblock %} {% block content %}
+♡ {{ 'A MOMENT FOR YOU' if lang == 'en' else 'మీ కోసం ఒక క్షణం' }}
+{{ 'Let’s check in with' if lang == 'en' else 'మీ సంబంధం గురించి' }} your relationship.
+{{ 'Answer based on what happens most of the time, not just one good or bad day. You can choose “not sure” whenever you need.' if lang == 'en' else 'ఒక్క మంచి లేదా చెడు రోజును బట్టి కాకుండా, సాధారణంగా ఏమి జరుగుతుందో దాని ఆధారంగా సమాధానం ఇవ్వండి. అవసరమైతే “తెలియదు” ఎంచుకోవచ్చు.' }}
+
+{{ '0 of 12 answered' if lang == 'en' else '12లో 0 సమాధానాలు' }}♡
+{% for q in questions %}{{ '%02d'|format(loop.index) }}{{ q.en if lang == 'en' else q.te }}
+{% for opt in options %} {{ opt.en if lang == 'en' else opt.te }} {% endfor %}
+{% endfor %}
+🔒
+{{ 'Please answer only if it feels safe. This tool is not a substitute for trusted support or professional help.' if lang == 'en' else 'మీకు సురక్షితంగా అనిపిస్తేనే సమాధానాలు ఇవ్వండి. ఇది నమ్మకమైన వ్యక్తి సహాయం లేదా నిపుణుల సహాయానికి ప్రత్యామ్నాయం కాదు.' }}
+
+{{ 'See my reflection' if lang == 'en' else 'నా ఫలితాలు చూడండి' }} →
+{% endblock %}
