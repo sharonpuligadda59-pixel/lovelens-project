@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %}{{ 'Your reflection' if lang == 'en' else 'మీ ఫలితాలు' }}{% endblock %} {% block content %}
+♡ {{ 'YOUR REFLECTION' if lang == 'en' else 'మీ ఆలోచన' }}
+{{ 'A little clarity for' if lang == 'en' else 'మీ సంబంధం గురించి' }} your next step.
+{{ 'This is a reflection guide based only on your answers. It cannot determine the whole relationship or diagnose anyone.' if lang == 'en' else 'ఇది మీ సమాధానాల ఆధారంగా ఇచ్చే సూచన మాత్రమే. మొత్తం సంబంధాన్ని లేదా వ్యక్తిని ఖచ్చితంగా నిర్ణయించలేదు.' }}
+
+{% if level == 'priority' %}
+!
+{{ 'PLEASE TAKE THIS SERIOUSLY' if lang == 'en' else 'దయచేసి దీన్ని సీరియస్‌గా తీసుకోండి' }}
+{{ 'Some answers point to important safety or boundary concerns.' if lang == 'en' else 'కొన్ని సమాధానాలు భద్రత లేదా వ్యక్తిగత హద్దుల గురించి ముఖ్యమైన ఆందోళనలను సూచిస్తున్నాయి.' }}
+{{ 'You deserve to feel safe and respected. Consider talking with a trusted adult, friend, counsellor, or local support service. If you are in immediate danger, contact local emergency services.' if lang == 'en' else 'మీరు భద్రంగా, గౌరవంగా ఉండటానికి అర్హులు. నమ్మకమైన పెద్దవారు, స్నేహితుడు లేదా కౌన్సిలర్‌తో మాట్లాడండి. తక్షణ ప్రమాదం ఉంటే స్థానిక అత్యవసర సేవలను సంప్రదించండి.' }}
+
+{% elif level == 'high' %}
+♡
+{{ 'AREAS TO PAY ATTENTION TO' if lang == 'en' else 'శ్రద్ధ పెట్టాల్సిన అంశాలు' }}
+{{ 'Several patterns may deserve a closer look.' if lang == 'en' else 'కొన్ని ప్రవర్తనా విధానాలను మరింత గమనించడం ఉపయోగపడుతుంది.' }}
+{{ 'Think about whether these patterns repeat, how they affect you, and whether your boundaries are respected.' if lang == 'en' else 'ఇవి మళ్లీ మళ్లీ జరుగుతున్నాయా, మీపై ఎలా ప్రభావం చూపుతున్నాయో, మీ హద్దులకు గౌరవం ఉందో ఆలోచించండి.' }}
+
+{% elif level == 'moderate' %}
+✧
+{{ 'ROOM FOR REFLECTION' if lang == 'en' else 'ఆలోచించాల్సిన అంశాలు' }}
+{{ 'A few patterns may need attention.' if lang == 'en' else 'కొన్ని అంశాలపై శ్రద్ధ పెట్టడం ఉపయోగపడుతుంది.' }}
+{{ 'Talk openly if it feels safe, and notice whether both people listen and make changes over time.' if lang == 'en' else 'సురక్షితంగా అనిపిస్తే ఓపెన్‌గా మాట్లాడండి. ఇద్దరూ ఒకరినొకరు విని, కాలక్రమంలో మార్పులు చేస్తున్నారో గమనించండి.' }}
+
+{% else %}
+♡
+{{ 'POSITIVE SIGNS IN YOUR ANSWERS' if lang == 'en' else 'మీ సమాధానాల్లో మంచి సంకేతాలు' }}
+{{ 'Your answers show some positive relationship patterns.' if lang == 'en' else 'మీ సమాధానాల్లో కొన్ని మంచి సంబంధ ప్రవర్తనలు కనిపిస్తున్నాయి.' }}
+{{ 'Keep nurturing respect, honesty, space, and mutual support. A lower concern score does not guarantee that every part of a relationship is healthy.' if lang == 'en' else 'గౌరవం, నిజాయితీ, స్వేచ్ఛ, పరస్పర సహాయాన్ని కొనసాగించండి. తక్కువ concern score అంటే సంబంధంలోని ప్రతిదీ ఆరోగ్యకరమని హామీ కాదు.' }}
+
+{% endif %}
+♡{{ 'Positive responses' if lang == 'en' else 'మంచి సమాధానాలు' }}{{ positive }}{{ 'across supportive behaviours' if lang == 'en' else 'సహాయక ప్రవర్తనలలో' }}
+✧{{ 'Concern indicators' if lang == 'en' else 'ఆందోళన సూచనలు' }}{{ concern }}{{ 'simple reflection points, not a diagnosis' if lang == 'en' else 'ఆలోచనకు సూచనలు మాత్రమే; నిర్ధారణ కాదు' }}
+{% if concern_items %}
+{{ 'Patterns to reflect on' if lang == 'en' else 'ఆలోచించాల్సిన ప్రవర్తనలు' }}
+{{ 'These are the answers that raised a reflection point. Context and repeated patterns matter.' if lang == 'en' else 'ఈ సమాధానాలు మరింత ఆలోచించాల్సిన అంశాలను సూచిస్తున్నాయి. సందర్భం, పదే పదే జరిగే విధానం ముఖ్యం.' }}
+
+{% for q in concern_items %}
+♡{{ q.en if lang == 'en' else q.te }}
+{% endfor %}
+{% endif %}
+{{ 'Gentle next steps' if lang == 'en' else 'తర్వాతి చిన్న అడుగులు' }}
+01
+{{ 'Name the behaviour' if lang == 'en' else 'ప్రవర్తనను గుర్తించండి' }}
+{{ 'Focus on specific actions and how often they happen, rather than labels.' if lang == 'en' else 'వ్యక్తికి label ivvadam kante, jarigina pani mariyu adi entha saarlu jaruguthundo gamaninchandi.' }}
+
+02
+{{ 'Protect your boundaries' if lang == 'en' else 'మీ హద్దులను కాపాడుకోండి' }}
+{{ 'You are allowed to have privacy, friendships, and independent choices.' if lang == 'en' else 'మీకు ప్రైవసీ, స్నేహాలు, మీ సొంత నిర్ణయాలు ఉండవచ్చు.' }}
+
+03
+{{ 'Reach out if needed' if lang == 'en' else 'అవసరమైతే సహాయం పొందండి' }}
+{{ 'Talk to someone trustworthy if you feel afraid, pressured, or unsafe.' if lang == 'en' else 'భయం, ఒత్తిడి లేదా భద్రతలేమి అనిపిస్తే నమ్మకమైన వ్యక్తితో మాట్లాడండి.' }}
+
+{{ 'Retake check-in' if lang == 'en' else 'మళ్లీ చెక్-ఇన్ చేయండి' }}{{ 'Read advice' if lang == 'en' else 'సలహాలు చదవండి' }}
+{{ 'Scores are simple rule-based indicators created for this demo, not a scientifically validated test. One answer or disagreement alone cannot define a relationship.' if lang == 'en' else 'ఈ స్కోర్లు demo కోసం రూపొందించిన సాధారణ నియమాల ఆధారిత సూచనలు మాత్రమే; శాస్త్రీయంగా ధృవీకరించిన పరీక్ష కాదు. ఒక్క సమాధానం లేదా ఒక disagreement సంబంధాన్ని నిర్వచించదు.' }}
+
+{% endblock %}
