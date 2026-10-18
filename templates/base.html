@@ -8,9 +8,9 @@
 </head>
 <body>
     <header class="site-header">
-        <a class="brand" href="{{ url_for('index') }}">♡ LoveLens</a>
+        <a class="brand" href="{{ url_for('home') }}">♡ LoveLens</a>
         <nav class="desktop-nav">
-            <a href="{{ url_for('index') }}">{{ 'Home' if lang == 'en' else 'హోమ్' }}</a>
+            <a href="{{ url_for('home') }}">{{ 'Home' if lang == 'en' else 'హోమ్' }}</a>
             <a href="{{ url_for('checkin') }}">{{ 'Check-in' if lang == 'en' else 'చెక్-ఇన్' }}</a>
             <a href="{{ url_for('advice') }}">{{ 'Advice' if lang == 'en' else 'సలహాలు' }}</a>
             <a href="{{ url_for('privacy') }}">{{ 'Privacy' if lang == 'en' else 'ప్రైవసీ' }}</a>
