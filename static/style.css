@@ -915,6 +915,41 @@ textarea {
     }
 }
 
+/* LoveLens home hero: illustration below the text */
+.hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+}
+
+.hero-copy {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.trust-note {
+    justify-content: center;
+}
+
+.hero-art {
+    width: 100%;
+    max-width: 520px;
+    margin: 25px auto 0;
+}
+
+@media (max-width: 600px) {
+    .hero-art {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+
+
 
     .site-footer {
         padding: 25px 18px;
