@@ -1,14 +1,100 @@
-{% extends "base.html" %} {% block title %}{{ 'Relationship check-in' if lang == 'en' else 'సంబంధ చెక్-ఇన్' }}{% endblock %} {% block content %}
-♡ {{ 'A MOMENT FOR YOU' if lang == 'en' else 'మీ కోసం ఒక క్షణం' }}
-{{ 'Let’s check in with' if lang == 'en' else 'మీ సంబంధం గురించి' }} your relationship.
-{{ 'Answer based on what happens most of the time, not just one good or bad day. You can choose “not sure” whenever you need.' if lang == 'en' else 'ఒక్క మంచి లేదా చెడు రోజును బట్టి కాకుండా, సాధారణంగా ఏమి జరుగుతుందో దాని ఆధారంగా సమాధానం ఇవ్వండి. అవసరమైతే “తెలియదు” ఎంచుకోవచ్చు.' }}
+```html
+{% extends "base.html" %}
 
-{{ '0 of 12 answered' if lang == 'en' else '12లో 0 సమాధానాలు' }}♡
-{% for q in questions %}{{ '%02d'|format(loop.index) }}{{ q.en if lang == 'en' else q.te }}
-{% for opt in options %} {{ opt.en if lang == 'en' else opt.te }} {% endfor %}
-{% endfor %}
-🔒
-{{ 'Please answer only if it feels safe. This tool is not a substitute for trusted support or professional help.' if lang == 'en' else 'మీకు సురక్షితంగా అనిపిస్తేనే సమాధానాలు ఇవ్వండి. ఇది నమ్మకమైన వ్యక్తి సహాయం లేదా నిపుణుల సహాయానికి ప్రత్యామ్నాయం కాదు.' }}
-
-{{ 'See my reflection' if lang == 'en' else 'నా ఫలితాలు చూడండి' }} →
+{% block title %}
+{{ 'Relationship check-in' if lang == 'en' else 'సంబంధ చెక్-ఇన్' }}
 {% endblock %}
+
+{% block content %}
+
+<section class="page-hero wrap">
+    <span class="eyebrow">♡ {{ 'A MOMENT FOR YOU' if lang == 'en' else 'మీ కోసం ఒక క్షణం' }}</span>
+
+    <h1>
+        {{ 'Let’s check in with your relationship.' if lang == 'en' else 'మీ సంబంధం గురించి ఆలోచిద్దాం.' }}
+    </h1>
+
+    <p class="hero-text">
+        {{ 'Answer based on what happens most of the time, not just one good or bad day. You can choose “not sure” whenever you need.' if lang == 'en' else 'ఒక్క మంచి లేదా చెడు రోజును బట్టి కాకుండా, సాధారణంగా ఏమి జరుగుతుందో దాని ఆధారంగా సమాధానం ఇవ్వండి. అవసరమైతే “తెలియదు” ఎంచుకోవచ్చు.' }}
+    </p>
+</section>
+
+<section class="checkin-section wrap">
+
+    <div class="progress-card">
+        <div class="progress-info">
+            <strong id="answered-count">
+                {{ '0 of 12 answered' if lang == 'en' else '12లో 0 సమాధానాలు' }}
+            </strong>
+            <span>♡</span>
+        </div>
+
+        <div class="progress-track">
+            <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('check_in') }}" id="checkin-form">
+
+        {% for q in questions %}
+        <fieldset class="question-card">
+            <legend>
+                <span class="question-number">{{ '%02d'|format(loop.index) }}</span>
+                {{ q.en if lang == 'en' else q.te }}
+            </legend>
+
+            <div class="option-grid">
+                {% for opt in options %}
+                <label class="option-input">
+                    <input
+                        type="radio"
+                        name="{{ q.id }}"
+                        value="{{ opt.value }}"
+                        required
+                    >
+                    <span>{{ opt.en if lang == 'en' else opt.te }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </fieldset>
+        {% endfor %}
+
+        <div class="safety-note">
+            <span>🔒</span>
+            <p>
+                {{ 'Please answer only if it feels safe. This tool is not a substitute for trusted support or professional help.' if lang == 'en' else 'మీకు సురక్షితంగా అనిపిస్తేనే సమాధానాలు ఇవ్వండి. ఇది నమ్మకమైన వ్యక్తి సహాయం లేదా నిపుణుల సహాయానికి ప్రత్యామ్నాయం కాదు.' }}
+            </p>
+        </div>
+
+        <button class="btn btn-primary btn-wide" type="submit">
+            {{ 'See my reflection' if lang == 'en' else 'నా ఫలితాలు చూడండి' }} →
+        </button>
+
+    </form>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('checkin-form');
+    const count = document.getElementById('answered-count');
+    const bar = document.getElementById('progress-bar');
+    const total = {{ questions|length }};
+    const isEnglish = {{ 'true' if lang == 'en' else 'false' }};
+
+    function updateProgress() {
+        const answered = form.querySelectorAll('input[type="radio"]:checked').length;
+
+        count.textContent = isEnglish
+            ? `${answered} of ${total} answered`
+            : `${total}లో ${answered} సమాధానాలు`;
+
+        bar.style.width = total ? `${answered / total * 100}%` : '0%';
+    }
+
+    form.addEventListener('change', updateProgress);
+    updateProgress();
+});
+</script>
+
+{% endblock %}
+```
