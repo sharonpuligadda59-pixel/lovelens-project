@@ -833,8 +833,12 @@ textarea {
     }
 
     .results-page .stat-card h2 {
-        font-size: 32px;
+       font-size: 32px;
     }
+    .site-footer {
+        padding: 25px 18px;
+    }
+}
    
 /* Privacy page enhancements */
 .privacy-page .page-hero {
@@ -946,12 +950,5 @@ textarea {
     .hero-art {
         max-width: 100%;
         margin-top: 20px;
-    }
-}
-
-
-
-    .site-footer {
-        padding: 25px 18px;
     }
 }
