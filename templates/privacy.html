@@ -1,24 +1,100 @@
-{% extends "base.html" %} {% block title %}{{ 'Privacy' if lang == 'en' else 'ప్రైవసీ' }}{% endblock %} {% block content %}
-🔒 {{ 'YOUR PRIVACY MATTERS' if lang == 'en' else 'మీ ప్రైవసీ ముఖ్యం' }}
-{{ 'A private space to' if lang == 'en' else 'మీకు అనుకూలంగా' }} reflect safely.
-{{ 'This demo does not use a database or ask for names, phone numbers, or account details.' if lang == 'en' else 'ఈ demo database ఉపయోగించదు; పేర్లు, ఫోన్ నంబర్లు లేదా account వివరాలు అడగదు.' }}
 
-✓
-{{ 'No account needed' if lang == 'en' else 'Account అవసరం లేదు' }}
-{{ 'You can use the check-in without signing up.' if lang == 'en' else 'Sign up cheyyakunda check-in use cheyyachu.' }}
+{% extends "base.html" %}
 
-✓
-{{ 'No database storage' if lang == 'en' else 'Database storage లేదు' }}
-{{ 'Answers are processed for the results page and are not written to a database. Avoid entering identifying or highly sensitive details.' if lang == 'en' else 'ఫలితాల కోసం సమాధానాలు process అవుతాయి; database లో save కావు. వ్యక్తిగత గుర్తింపు వివరాలు ఇవ్వకండి.' }}
+{% block title %}
+{{ 'Privacy' if lang == 'en' else 'ప్రైవసీ' }}
+{% endblock %}
 
-✓
-{{ 'Clear this session' if lang == 'en' else 'ఈ సెషన్ క్లియర్ చేయండి' }}
-{{ 'Clear the simple session data used for language preference and demo results.' if lang == 'en' else 'భాష ఎంపిక మరియు demo ఫలితాలకు ఉపయోగించిన session data క్లియర్ చేయండి.' }}
+{% block content %}
 
-{% if cleared %}
-{{ 'Session data cleared.' if lang == 'en' else 'సెషన్ డేటా క్లియర్ అయింది.' }}
-{% endif %}
-{{ 'Clear session data' if lang == 'en' else 'సెషన్ డేటా క్లియర్ చేయండి' }}
-{{ 'This is a student demo, not a secure production service. Do not deploy it publicly without reviewing security, session settings, and privacy requirements.' if lang == 'en' else 'ఇది student demo మాత్రమే; production service కాదు. Security మరియు privacy settings review చేయకుండా public గా deploy చేయకండి.' }}
+<div class="privacy-page">
+
+    <section class="page-hero">
+        <span class="eyebrow">
+            🔒 {{ 'YOUR PRIVACY MATTERS' if lang == 'en' else 'మీ ప్రైవసీ ముఖ్యం' }}
+        </span>
+
+        <h1>
+            {{ 'A private space to reflect safely.' if lang == 'en' else 'మీకు అనుకూలంగా ఆలోచించడానికి ఒక ప్రైవేట్ స్థలం.' }}
+        </h1>
+
+        <p class="hero-text">
+            {{ 'This demo does not use a database or ask for names, phone numbers, or account details.' if lang == 'en' else 'ఈ demo database ఉపయోగించదు; పేర్లు, ఫోన్ నంబర్లు లేదా account వివరాలు అడగదు.' }}
+        </p>
+    </section>
+
+    <section class="privacy-cards">
+
+        <article class="feature-card">
+            <div class="advice-icon" aria-hidden="true">✓</div>
+
+            <h3>
+                {{ 'No account needed' if lang == 'en' else 'Account అవసరం లేదు' }}
+            </h3>
+
+            <p>
+                {{ 'You can use the check-in without signing up.' if lang == 'en' else 'Sign up చేయకుండా check-in ఉపయోగించవచ్చు.' }}
+            </p>
+        </article>
+
+        <article class="feature-card">
+            <div class="advice-icon" aria-hidden="true">🔒</div>
+
+            <h3>
+                {{ 'No database storage' if lang == 'en' else 'Database storage లేదు' }}
+            </h3>
+
+            <p>
+                {{ 'Answers are processed for the results page and are not written to a database. Avoid entering identifying or highly sensitive details.' if lang == 'en' else 'ఫలితాల కోసం సమాధానాలు process అవుతాయి; database లో save కావు. వ్యక్తిగత గుర్తింపు వివరాలు ఇవ్వకండి.' }}
+            </p>
+        </article>
+
+        <article class="feature-card">
+            <div class="advice-icon" aria-hidden="true">↻</div>
+
+            <h3>
+                {{ 'Clear this session' if lang == 'en' else 'ఈ సెషన్ క్లియర్ చేయండి' }}
+            </h3>
+
+            <p>
+                {{ 'Clear the simple session data used for language preference and demo results.' if lang == 'en' else 'భాష ఎంపిక మరియు demo ఫలితాలకు ఉపయోగించిన session data క్లియర్ చేయండి.' }}
+            </p>
+        </article>
+
+    </section>
+
+    {% if cleared %}
+    <div class="privacy-status" role="status">
+        ✓ {{ 'Session data cleared.' if lang == 'en' else 'సెషన్ డేటా క్లియర్ అయింది.' }}
+    </div>
+    {% endif %}
+
+    <section class="privacy-action">
+        <h2>
+            {{ 'Clear session data' if lang == 'en' else 'సెషన్ డేటా క్లియర్ చేయండి' }}
+        </h2>
+
+        <p>
+            {{ 'Use this button to clear the session data managed by this demo.' if lang == 'en' else 'ఈ demo నిర్వహించే session data క్లియర్ చేయడానికి ఈ బటన్ ఉపయోగించండి.' }}
+        </p>
+
+        <form method="POST" action="{{ url_for('privacy') }}">
+            <button class="btn btn-primary" type="submit">
+                {{ 'Clear session data' if lang == 'en' else 'సెషన్ డేటా క్లియర్ చేయండి' }}
+            </button>
+        </form>
+    </section>
+
+    <section class="privacy-warning">
+        <h3>
+            {{ 'Important note' if lang == 'en' else 'ముఖ్యమైన గమనిక' }}
+        </h3>
+
+        <p>
+            {{ 'This is a student demo, not a secure production service. Do not deploy it publicly without reviewing security, session settings, and privacy requirements.' if lang == 'en' else 'ఇది student demo మాత్రమే; production service కాదు. Security మరియు privacy settings review చేయకుండా public గా deploy చేయకండి.' }}
+        </p>
+    </section>
+
+</div>
 
 {% endblock %}
