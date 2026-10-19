@@ -8,7 +8,9 @@
 {% block content %}
 
 <section class="page-hero wrap">
-    <span class="eyebrow">♡ {{ 'A MOMENT FOR YOU' if lang == 'en' else 'మీ కోసం ఒక క్షణం' }}</span>
+    <span class="eyebrow">
+        ♡ {{ 'A MOMENT FOR YOU' if lang == 'en' else 'మీ కోసం ఒక క్షణం' }}
+    </span>
 
     <h1>
         {{ 'Let’s check in with your relationship.' if lang == 'en' else 'మీ సంబంధం గురించి ఆలోచిద్దాం.' }}
@@ -34,12 +36,14 @@
         </div>
     </div>
 
-    <form method="POST" action="{{ url_for('check_in') }}" id="checkin-form">
+    <form method="POST" action="{{ url_for('results') }}" id="checkin-form">
 
         {% for q in questions %}
         <fieldset class="question-card">
             <legend>
-                <span class="question-number">{{ '%02d'|format(loop.index) }}</span>
+                <span class="question-number">
+                    {{ '%02d'|format(loop.index) }}
+                </span>
                 {{ q.en if lang == 'en' else q.te }}
             </legend>
 
@@ -82,13 +86,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const isEnglish = {{ 'true' if lang == 'en' else 'false' }};
 
     function updateProgress() {
-        const answered = form.querySelectorAll('input[type="radio"]:checked').length;
+        const answered = form.querySelectorAll(
+            'input[type="radio"]:checked'
+        ).length;
 
         count.textContent = isEnglish
             ? `${answered} of ${total} answered`
             : `${total}లో ${answered} సమాధానాలు`;
 
-        bar.style.width = total ? `${answered / total * 100}%` : '0%';
+        bar.style.width = total
+            ? `${answered / total * 100}%`
+            : '0%';
     }
 
     form.addEventListener('change', updateProgress);
