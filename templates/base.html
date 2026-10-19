@@ -36,11 +36,22 @@
             </a>
         </nav>
 
-        <form class="language-form" method="get">
+        <!-- Language switch -->
+        <form
+            class="language-form"
+            method="POST"
+            action="{{ url_for('language') }}"
+        >
+            <input
+                type="hidden"
+                name="next"
+                value="{{ request.path }}"
+            >
+
             <button
                 class="language-button"
                 type="submit"
-                name="lang"
+                name="language"
                 value="{{ 'te' if lang == 'en' else 'en' }}"
             >
                 {{ 'తెలుగు' if lang == 'en' else 'English' }}
