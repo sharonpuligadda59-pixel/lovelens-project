@@ -835,6 +835,86 @@ textarea {
     .results-page .stat-card h2 {
         font-size: 32px;
     }
+   
+/* Privacy page enhancements */
+.privacy-page .page-hero {
+    padding-top: 30px;
+    padding-bottom: 35px;
+}
+
+.privacy-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 25px 0 35px;
+}
+
+.privacy-cards .feature-card {
+    height: 100%;
+}
+
+.privacy-cards .feature-card p {
+    color: var(--muted);
+}
+
+.privacy-action {
+    margin: 30px 0;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, #fff0f7, #f2edff);
+}
+
+.privacy-action p {
+    color: var(--muted);
+}
+
+.privacy-status {
+    margin: 20px 0;
+    padding: 15px 18px;
+    border: 1px solid #c9e8d4;
+    border-radius: 12px;
+    background: #f0fff5;
+    color: #236b43;
+    font-weight: 700;
+}
+
+.privacy-warning {
+    margin: 30px 0;
+    padding: 22px;
+    border-left: 4px solid var(--pink);
+    border-radius: 12px;
+    background: var(--pink-light);
+}
+
+.privacy-warning h3 {
+    color: var(--pink-dark);
+}
+
+.privacy-warning p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 800px) {
+    .privacy-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .privacy-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .privacy-action {
+        padding: 20px;
+    }
+
+    .privacy-action .btn {
+        width: 100%;
+    }
+}
+
 
     .site-footer {
         padding: 25px 18px;
